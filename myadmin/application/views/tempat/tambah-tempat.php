@@ -53,6 +53,9 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
+                                    <?php echo validation_errors(); ?>
+                                        <?php echo form_open($action= base_url('tempat/simpan-data')); ?>
+
                                         <form class="form" method="post" action="<?= base_url('tempat/simpan-data') ?>" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-md-6 col-12">

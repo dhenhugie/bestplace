@@ -62,13 +62,13 @@ class Bestplace_model extends CI_Model
   public function simpan_tempat($data)
   {
     $this->db->insert('tbl_tempat', $data);
-    return $this->db->insert_id();
+    // return $this->db->insert_id();
   }
 
   public function simpan_tiket($data)
   {
     $this->db->insert('tbl_tiket', $data);
-    return $this->db->insert_id();
+    // return $this->db->insert_id();
   }
   public function simpan_kategori_tempat($data)
   {

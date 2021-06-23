@@ -55,12 +55,16 @@ class Dashboard extends CI_Controller
 		// $this->form_validation->set_rules('userfile[]', 'Foto', 'required');
 
 		if ($this->input->post('tiket') == "on") {
+			
 			$this->form_validation->set_rules('harga', 'Harga Tiket Masuk', 'required');
 		}
 		if ($this->form_validation->run() == FALSE) {
-
-			redirect('tempat/tambah-data');
+			// print_r("wda");
+			$data['kategori'] = $this->model->kategori()->result();
+			$this->load->view('tempat/tambah-tempat', $data);
+			// redirect('tempat/tambah-data');
 		} else {
+			// Simpan Tempat
 			$nama = $this->input->post('nama');
 			$ringkasan = $this->input->post('ringkasan');
 			$deskripsi = $this->input->post('deskripsi');
@@ -75,6 +79,7 @@ class Dashboard extends CI_Controller
 
 			$tempat = $this->model->simpan_tempat($data);
 
+			// Simpan TIket
 			$tiket = $this->input->post('tiket');
 			$harga = $this->input->post('harga');
 			if ($tiket == "on") {
@@ -85,6 +90,7 @@ class Dashboard extends CI_Controller
 				$this->model->simpan_tiket($data);
 			}
 
+			// Simpan Kategori
 			$kategori = $this->input->post('kategori');
 			foreach ($kategori as $key) {
 				$data = array(
@@ -94,6 +100,7 @@ class Dashboard extends CI_Controller
 				$this->model->simpan_kategori_tempat($data);
 			}
 
+			// Upload Foto
 			$this->load->library('upload');
 			$files = $_FILES;
 			$cpt = count($_FILES['userfile']['name']);
