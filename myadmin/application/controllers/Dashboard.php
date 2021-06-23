@@ -76,8 +76,13 @@ class Dashboard extends CI_Controller
 				'deskripsi' => $deskripsi,
 				'alamat' => $alamat
 			);
-
-			$tempat = $this->model->simpan_tempat($data);
+			
+			$this->model->simpan_tempat($data);
+			
+			// Ambil id tempat terakhir
+			$dte = $this->model->tempat_terakhir()->row();
+			$tempat = $dte->id_tempat;
+			// echo $tempat;
 
 			// Simpan TIket
 			$tiket = $this->input->post('tiket');
@@ -92,46 +97,47 @@ class Dashboard extends CI_Controller
 
 			// Simpan Kategori
 			$kategori = $this->input->post('kategori');
+			
 			foreach ($kategori as $key) {
 				$data = array(
 					'id_tempat' => $tempat,
-					"id_kategori" => $key
+					'id_kategori' => $key
 				);
 				$this->model->simpan_kategori_tempat($data);
 			}
 
 			// Upload Foto
-			$this->load->library('upload');
-			$files = $_FILES;
-			$cpt = count($_FILES['userfile']['name']);
-			for ($i = 0; $i < $cpt; $i++) {
-				$elemen = explode(".", $files['userfile']['name'][$i]);
-				$ext = end($elemen);
+			// $this->load->library('upload');
+			// $files = $_FILES;
+			// $cpt = count($_FILES['userfile']['name']);
+			// for ($i = 0; $i < $cpt; $i++) {
+			// 	$elemen = explode(".", $files['userfile']['name'][$i]);
+			// 	$ext = end($elemen);
 
-				$name = time() . $i . '.' . $ext;
-				$_FILES['userfile']['name'] = $name;
-				$_FILES['userfile']['type'] = $files['userfile']['type'][$i];
-				$_FILES['userfile']['tmp_name'] = $files['userfile']['tmp_name'][$i];
-				$_FILES['userfile']['error'] = $files['userfile']['error'][$i];
-				$_FILES['userfile']['size'] = $files['userfile']['size'][$i];
+			// 	$name = time() . $i . '.' . $ext;
+			// 	$_FILES['userfile']['name'] = $name;
+			// 	$_FILES['userfile']['type'] = $files['userfile']['type'][$i];
+			// 	$_FILES['userfile']['tmp_name'] = $files['userfile']['tmp_name'][$i];
+			// 	$_FILES['userfile']['error'] = $files['userfile']['error'][$i];
+			// 	$_FILES['userfile']['size'] = $files['userfile']['size'][$i];
 
-				$this->upload->initialize($this->set_upload_options("tempat"));
-				$this->upload->do_upload();
-				$data = array(
-					'id_tempat' => $tempat,
-					'filename' => $name
-				);
-				$res = $this->model->simpan_foto_tempat($data);
-			}
+			// 	$this->upload->initialize($this->set_upload_options("tempat"));
+			// 	$this->upload->do_upload();
+			// 	$data = array(
+			// 		'id_tempat' => $tempat,
+			// 		'filename' => $name
+			// 	);
+			// 	$res = $this->model->simpan_foto_tempat($data);
+			// }
 
-			if ($res) {
-				redirect('tempat');
-			} else {
-				return false;
-			}
+			// if ($res) {
+			// 	redirect('tempat');
+			// } else {
+			// 	return false;
+			// }
 		}
 	}
-
+	
 
 	private function set_upload_options($type)
 	{
@@ -217,8 +223,8 @@ class Dashboard extends CI_Controller
 		$where = "id_kategori = '" . $id . "'";
 		$data['kategori'] = $this->model->data_kategori($where)->row();
 		$data['action'] = $action == 'view-data' ? 'view' : 'edit';
-		$data['kategori'] = $this->model->all_kategori_perkategori($id)->result();
-		$data['tiket'] = $this->model->tiket_perkategori($where)->row();
+		// $data['kategori'] = $this->model->all_kategori_perkategori($id)->result();
+		// $data['tiket'] = $this->model->tiket_perkategori($where)->row();
 		$data['result'] = false;
 		if ($action == 'view-data') {
 			$this->load->view('kategori/data-kategori', $data);

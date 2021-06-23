@@ -21,6 +21,11 @@ class Bestplace_model extends CI_Model
     return $this->db->get();
   }
 
+  public function tempat_terakhir()
+  {
+    return $this->db->query("SELECT * FROM tbl_tempat ORDER BY id_tempat DESC LIMIT 1");
+  }
+
   public function data_tempat($where)
   {
     $this->db->select('*');
@@ -42,6 +47,14 @@ class Bestplace_model extends CI_Model
     return $this->db->query("SELECT * FROM tbl_kategori");
   }
 
+  public function data_kategori($where)
+  {
+    $this->db->select('*');
+    $this->db->from('tbl_kategori');
+    $this->db->where($where);
+    return $this->db->get();
+  }
+
   public function kategori_pertempat($id_tempat)
   {
     return $this->db->query("SELECT tkt.id_kategori, nama_kategori
@@ -56,7 +69,8 @@ class Bestplace_model extends CI_Model
     return $this->db->query("SELECT tbl_kategori.id_kategori, nama_kategori, COALESCE(tbl_tempat.id_tempat,0) as kategori
     FROM tbl_kategori
     LEFT JOIN tbl_kategori_tempat tkt ON tkt.id_kategori = tbl_kategori.id_kategori
-    LEFT JOIN (SELECT * FROM tbl_tempat WHERE id_tempat = '$id_tempat') AS tbl_tempat ON tbl_tempat.id_tempat = tkt.id_tempat");
+    LEFT JOIN (SELECT * FROM tbl_tempat WHERE id_tempat = '$id_tempat') AS tbl_tempat ON tbl_tempat.id_tempat = tkt.id_tempat GROUP BY id_kategori");
+  //   return $this->db->query("SELECT tbl_kategori.id_kategori as id_kategori, tbl_kategori.nama_kategori as kategori, tbl_kategori_tempat.id_tempat, tbl_tempat.nama, deskripsi, alamat, ringkasan FROM tbl_kategori LEFT JOIN tbl_kategori_tempat ON tbl_kategori.id_kategori = tbl_kategori_tempat.id_kategori LEFT JOIN tbl_tempat ON tbl_kategori_tempat.id_tempat = tbl_tempat.id_tempat WHERE tbl_tempat.id_tempat = '$id_tempat'");
   }
 
   public function simpan_tempat($data)
