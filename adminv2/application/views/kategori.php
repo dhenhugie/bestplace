@@ -2,7 +2,7 @@
 	<div id="content">
 		<div class="card">
 			<div class="card-header">
-				<h3><a class="float-end" href="#"><button class="btn btn-primary float-end" type="button">Tambah
+				<h3><a class="float-end" href="<?php echo base_url()?>admin/kategori/tambah_kategori"><button class="btn btn-primary float-end" type="button">Tambah
 							Kategori</button></a>Data Kategori</h3>
 			</div>
 			<div class="card-body">

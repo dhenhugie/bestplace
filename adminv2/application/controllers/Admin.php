@@ -16,4 +16,11 @@ class Admin extends CI_Controller {
 		$this->load->view('kategori');
         $this->load->view('footer');
 	}
+
+    public function tambah_kategori()
+	{
+        $this->load->view('header');
+		$this->load->view('tambah_kategori');
+        $this->load->view('footer');
+	}
 }
