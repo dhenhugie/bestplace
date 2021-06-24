@@ -29,7 +29,15 @@ class Dashboard extends CI_Controller
 		$data['tempat'] = $this->model->data_tempat($where)->row();
 		$data['action'] = $action == 'view-data' ? 'view' : 'edit';
 		$data['kategori'] = $this->model->all_kategori_pertempat($id)->result();
-		$data['tiket'] = $this->model->tiket_pertempat($where)->row();
+		if ($this->model->tiket_pertempat($where)->num_rows() < 0){
+			$id_tempat ='222';
+			$harga ='222';
+			$data['tiket'] = array (
+				'id_tempat' => $id_tempat,
+				'harga' => $harga
+			);
+		}else{$data['tiket'] = $this->model->tiket_pertempat($where)->row();}
+
 		$data['result'] = false;
 		if ($action == 'view-data') {
 			$this->load->view('tempat/data-tempat', $data);

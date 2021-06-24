@@ -96,11 +96,11 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-check form-switch mt-3 mb-3">
-                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" <?= isset($tiket->id) ?: "checked"; ?>>
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" <?= isset($tiket->id_tempat) ?: "checked"; ?>>
                                                         <label class="form-check-label" for="flexSwitchCheckDefault">Tiket untuk masuk tempat ini</label>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="number" id="tiket" class="form-control" value="<?= $tiket->harga ?>" placeholder="Harga Tiket" name="tiket" readonly>
+                                                        <input type="number" id="tiket" class="form-control" value="<?php echo $tiket->harga?>" placeholder="Harga Tiket" name="tiket" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="container mb-4 mt-4">
