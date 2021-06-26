@@ -53,3 +53,6 @@ $route['default_controller'] = 'admin';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['admin/kategori/tambah_kategori'] = 'admin/tambah_kategori';
+$route['admin/tempat/tambah_tempat'] = 'admin/tambah_tempat';
+$route['admin/tempat/simpan_tempat'] = 'admin/simpan_tempat';
+$route['admin/tempat/hapus_tempat/(:any)'] = 'admin/hapus_tempat';

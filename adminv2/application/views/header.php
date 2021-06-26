@@ -29,7 +29,7 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="tempat.html"><i class="fa fa-map-signs"></i>Tempat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url()?>admin/tempat"><i class="fa fa-map-signs"></i>Tempat</a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo base_url()?>admin/kategori"><i class="fas fa-user-circle"></i><span>Kategori</span></a><a class="nav-link" href="login.html"><i class="fa fa-ticket"></i>Pemesanan Tiket</a></li>
                     <li class="nav-item"></li>
